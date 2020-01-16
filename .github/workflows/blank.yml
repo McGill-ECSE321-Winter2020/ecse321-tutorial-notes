@@ -11,6 +11,7 @@ jobs:
     - name: Install # The project is built using npm and placed in the 'build' folder.
       run: |
         sudo apt-get install ruby-full
+        sudo gem install asciidoctor
     - name: Build page
       run: ./convert.sh
     - name: GitHub Pages Deploy
