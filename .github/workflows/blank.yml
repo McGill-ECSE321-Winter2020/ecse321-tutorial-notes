@@ -1,0 +1,15 @@
+name: Build and Deploy GH Pages
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: GitHub Pages Deploy
+      uses: maxheld83/ghpages@v0.2.1
+    - name: script placeholder
+      run: |
+        echo Hello
