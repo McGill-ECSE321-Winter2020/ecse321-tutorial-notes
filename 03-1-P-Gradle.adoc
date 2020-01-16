@@ -1,0 +1,108 @@
+=== Gradle: A Build Framework
+
+==== Example Gradle application
+
+This section focuses on writing a Gradle (https://gradle.org/) build script that builds a single Gradle project referred to as _Computation_. The source code and tests for a Java application is available here: link:resources/Computation.zip[Computation.zip] (src and tst folders). It is your job to create a folder called _Computation_, move sources and tests into that folder, and produce the Gradle build script _build.gradle_ within this folder to automate the software build process for this project. 
+
+
+First, open a terminal, and ensure you have the newes version  of Gradle (ver. 5.0+) installed with `gradle --version`.
+
+Follow the steps below and add the snippets listed here to `build.gradle`, one after the other:
+
+. Create the following folder structure and a new _build.gradle_ (empty) file within the _Computation_ folder:
+[source,none]
+----
+Computation
+├── build.gradle
+└── src
+    ├── main
+    │   └── java
+    │       ├── application
+    │       │   └── CompApp.java
+    │       ├── computation
+    │       │   └── Computation.java
+    │       └── view
+    │           └── ComputationPage.java
+    └── test
+        └── java
+            └── computation
+                ├── AllTests.java
+                ├── ComputationTestAddSubstract.java
+                └── ComputationTestDivideMultiply.java
+----
+
+. Add the `java` and the `application` plugins to the build configuration script _build.gradle_. 
++
+[source,gradle]
+----
+apply plugin: 'java'
+// This plugin has a predefined 'run' task that we can reuse to use Gradle to execute our application
+apply plugin: 'application'
+----
+. Add JUnit libraries to the `dependencies` section.
++
+[source,gradle]
+----
+repositories {
+    mavenCentral()
+}
+dependencies {
+    testImplementation "junit:junit:4.12"
+}
+----
+. Add and describe a new task `compile(type: JavaCompile)` to specify all source files (both application and test) and set the _build/bin_ as destination dir to put all compiled class files in.
++
+[source,gradle]
+----
+task compile(type: JavaCompile) {
+  classpath = sourceSets.main.compileClasspath
+  classpath += sourceSets.test.runtimeClasspath
+  sourceSets.test.java.outputDir = file('build/bin')
+  sourceSets.main.java.outputDir = file('build/bin')
+}
+----
++
+[NOTE]
+One can specify source sets and their variables the following way:
++
+[source,gradle]
+----
+/*
+ * specifying sourceSets is not necessary in this case, since
+ * we are applying the default folder structure assumed by Gradle
+ */
+sourceSets {
+  main {
+    java { srcDir 'src/main/java' }
+  }
+  test {
+    java { srcDir 'src/test/java'}
+  }
+}
+----
+
+. Specify the main class and run the application.
++
+[source,gradle]
+----
+mainClassName='application.CompApp'
+----
++
+In the command line issue `gradle run`
+
+. Describe the `jar` Gradle task (defined by the `java` plugin) to produce an executable jar file into `distributable/`.
++
+[source,gradle]
+----
+jar {
+  destinationDir=file('distributable')
+  manifest { 
+    // It is smart to reuse the name of the main class variable instead of hardcoding it
+    attributes "Main-Class": "$mainClassName"
+  }  
+}
+----
+
+[NOTE]
+The `settings.gradle` and its usage is to be shown later.
+
