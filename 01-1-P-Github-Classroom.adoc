@@ -1,0 +1,15 @@
+=== Getting Started
+
+Steps for signing up for GitHub classroom:
+
+. Log in/Register on GitHub.
+
+. Open link https://classroom.github.com/g/o9gWNZis
+
+. Select your McGill ID from the list
++
+image:figs/mcgill-ids.png[ID selection]
+
+. Join team _All students_
++
+image:figs/join-org.png[Join team]
