@@ -30,17 +30,17 @@ include::{chapterdir}/01-2-P-Agile-Tools.adoc[]
 include::{chapterdir}/01-3-P-Terminal-Basics.adoc[]
 
 <<<
-include::{chapterdir}/02-1-P-Git-Basics.adoc[]
+include::{chapterdir}/01-4-P-Git-Basics.adoc[]
 
 <<<
-include::{chapterdir}/03-1-P-Gradle.adoc[]
+include::{chapterdir}/02-1-P-Gradle.adoc[]
 
 <<<
-include::{chapterdir}/02-2-P-Travis.adoc[]
+include::{chapterdir}/02-2-B-Backend-Setup.adoc[]
 
 <<<
-include::{chapterdir}/03-2-B-Backend-Setup.adoc[]
+include::{chapterdir}/02-3-P-Travis.adoc[]
 
 <<<
-include::{chapterdir}/03-3-B-Heroku.adoc[]
+include::{chapterdir}/02-4-B-Heroku.adoc[]
 
