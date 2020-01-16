@@ -1,0 +1,34 @@
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+:rootdir: .
+ifndef::source-highlighter[:source-highlighter: highlightjs]
+ifndef::highlightjsdir[:highlightjsdir: {rootdir}/highlight.js]
+ifndef::highlightjs-theme[:highlightjs-theme: foundation]
+:imagesdir: {rootdir}
+:toclevels: 3
+:toc:
+:toc2:
+:chapterdir: .
+:numbered:
+
+= ECSE 321 Introduction to Software Engineering: Hands-on Tutorials
+McGill University
+
+Sections of the tutorial will continuously be published at this web page.
+
+== Preliminaries
+
+<<<
+include::{chapterdir}/01-1-P-Github-Classroom.adoc[]
+
+<<<
+include::{chapterdir}/01-2-P-Agile-Tools.adoc[]
+
+<<<
+include::{chapterdir}/01-3-P-Terminal-Basics.adoc[]
+
+<<<
+include::{chapterdir}/02-1-P-Git-Basics.adoc[]
+
+<<<
+include::{chapterdir}/02-2-P-Travis.adoc[]
+
