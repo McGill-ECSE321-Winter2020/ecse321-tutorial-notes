@@ -1,15 +1,20 @@
 name: Build and Deploy GH Pages
-
-on: [push]
-
+on:
+  push:	
+    branches:	
+      - master
 jobs:
-  build:
-
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
+    - uses: actions/checkout@v1
+    - name: Install # The project is built using npm and placed in the 'build' folder.
+      run: |
+        apt install ruby-full
+    - name: Build page
+      run: ./convert.sh
     - name: GitHub Pages Deploy
       uses: maxheld83/ghpages@v0.2.1
-    - name: script placeholder
-      run: |
-        echo Hello
+      env:
+        BUILD_DIR: output/
+    
