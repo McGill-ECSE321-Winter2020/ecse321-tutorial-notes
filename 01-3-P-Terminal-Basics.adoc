@@ -1,10 +1,12 @@
 === Command Line Basics
 
-This section shows a few handy terminal commands.
+This section shows a few handy terminal commands. To practice the use of the command line without the risk of doing something unwanted to your files, you can use the free Webminal service: https://www.webminal.org/
 
 ==== Windows prerequisites
 
-This step can be skipped if you are using MacOS or Linux. However, if you are using Windows, you need to have a terminal that supports the execution of basic Linux commands. Such programs are Git Bash or MinGW, for example. You can find below a few helper steps to get MinGW running on your system.
+This step can be skipped if you are using MacOS or Linux. However, if you are using Windows, you need to have a terminal that supports the execution of basic Linux commands. Such programs are Git Bash or MinGW, for example.
+
+You can find below a few helper steps to get MinGW running on your system.
 
 . Get the link:https://osdn.net/projects/mingw/downloads/68260/mingw-get-setup.exe/[MinGW installer from here]
 
