@@ -2,8 +2,7 @@
 
 ==== Example Gradle application
 
-This section focuses on writing a Gradle (https://gradle.org/) build script that builds a single Gradle project referred to as _Computation_. The source code and tests for a Java application is available here: link:resources/Computation.zip[Computation.zip] (src and tst folders). It is your job to create a folder called _Computation_, move sources and tests into that folder, and produce the Gradle build script _build.gradle_ within this folder to automate the software build process for this project. 
-
+This section focuses on writing a Gradle (https://gradle.org/) build script that builds a single Gradle project referred to as _Computation_. The source code and tests for a Java application is available here: link:https://mcgill-my.sharepoint.com/:u:/g/personal/marton_bur_mail_mcgill_ca/ETicI0zWLA1KrXk4Zw2tvjgBBlRY1Y6OED-aCVmDYsfviw?e=ci4BHu[Computation.zip] (click the _Dowload_ button in the upper left corner to get the whole zip file). It is your job to create/reorganize the folder called _Computation_, move sources and tests into that folder, and produce the Gradle build script _build.gradle_ within this folder to automate the software build and testing process for this example project. 
 
 First, open a terminal, and ensure you have the newes version  of Gradle (ver. 5.0+) installed with `gradle --version`.
 
