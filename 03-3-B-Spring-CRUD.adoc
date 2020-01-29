@@ -1,0 +1,72 @@
+=== CRUD Repositories
+
+Previously, in the `ca.mcgill.ecse321.eventregistration.dao.EventRegistrationRepository` class we used an instance of `javax.persistence.EntityManager` from Hibernate to directly to implement the required operations related to saving/retrieving data to/from a database (Create, Read, Update, and Delete operations, shortly, CRUD). 
+This section will introduce the Spring framework's inbuilt support for such CRUD operations via the `org.springframework.data.repository.CrudRepository` interface and will show how to use such repositories to implement your use cases in so-called _service_ classes.
+
+If you would like to, you can obtain a version of the project that already has the changes from the previous tutorials link:https://github.com/McGill-ECSE321-Winter2019/eventregistration[here].
+
+==== Creating a CRUD Repository
+
+. Create a new interface `PersonRepository` in the `ca.mcgill.ecse321.eventregistration.dao` package and extend the `CrudRepository<Person, String>` interface
+
+. Create a new method `Person findByName(String name)` 
++
+[source,java]
+----
+package ca.mcgill.ecse321.eventregistration.dao;
+
+import org.springframework.data.repository.CrudRepository;
+
+import ca.mcgill.ecse321.eventregistration.model.Person;
+
+public interface PersonRepository extends CrudRepository<Person, String>{
+	
+	Person findPersonByName(String name);
+	
+}
+----
+
+. Since Spring supports automated JPA Query creation from method names (see link:https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation[possible language constructs here]) **we don't need to implement the interface manually**, Spring JPA will create the corresponding queries runtime! This way we don't need to write SQL queries either.
+
+. Create interfaces for the `Event` and `Registration` classes as well +
+_EventRepository.java_:
++
+[source,java]
+----
+package ca.mcgill.ecse321.eventregistration.dao;
+
+import org.springframework.data.repository.CrudRepository;
+
+import ca.mcgill.ecse321.eventregistration.model.Event;
+
+public interface EventRepository extends CrudRepository<Event, String> {
+	
+	Event findEventByName(String name);
+
+}
+----
++
+_RegistrationRepository.java_:
++
+[source,java]
+----
+package ca.mcgill.ecse321.eventregistration.dao;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import ca.mcgill.ecse321.eventregistration.model.Event;
+import ca.mcgill.ecse321.eventregistration.model.Person;
+import ca.mcgill.ecse321.eventregistration.model.Registration;
+
+public interface RegistrationRepository extends CrudRepository<Registration, Integer> {
+
+	List<Registration> findByPerson(Person personName);
+
+	boolean existsByPersonAndEvent(Person person, Event eventName);
+
+	Registration findByPersonAndEvent(Person person, Event eventName);
+
+}
+----

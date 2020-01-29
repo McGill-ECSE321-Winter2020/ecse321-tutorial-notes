@@ -9,7 +9,8 @@ image:figs/travis-activate.png[Activate Travis-CI,width=600]
 
 . Select the repositories you want to build with Travis (make sure to include your repository that you created for this tutorial). You can modify this setting anytime later as well.
 
-. In your working copy of your repository, create a default Gradle java project. 
+
+. [Optional step: skip if you have a gradle project already] In your working copy of your repository, create a default Gradle java project. 
 * Make sure you have link:https://gradle.org/install/[Gradle] installed (`gradle --version`).
 * Issue `gradle init --type java-library`
 * Add a `.gitignore` to ignore generated resources by Git: 

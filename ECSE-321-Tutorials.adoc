@@ -32,6 +32,8 @@ include::{chapterdir}/01-4-P-Git-Basics.adoc[]
 <<<
 include::{chapterdir}/02-1-P-Gradle.adoc[]
 
+== Backend
+
 <<<
 include::{chapterdir}/02-2-B-Backend-Setup.adoc[]
 
@@ -41,3 +43,14 @@ include::{chapterdir}/02-3-P-Travis.adoc[]
 <<<
 include::{chapterdir}/02-4-B-Heroku.adoc[]
 
+<<<
+include::{chapterdir}/03-1-B-UML-Lab.adoc[]
+
+<<<
+include::{chapterdir}/03-2-B-Spring-Tools-Suite.adoc[]
+
+<<<
+include::{chapterdir}/03-3-B-Spring-CRUD.adoc[]
+
+<<<
+include::{chapterdir}/03-4-B-Spring-Testing.adoc[]
