@@ -147,3 +147,5 @@ public class TestEventRegistrationPersistence {
 
 }
 ----
+
+. Run this test suite by _right clicking on the class -> Run as... -> JUnit test_. Again, don't forget to set the `SPRING_DATASOURCE_URL` value for the run configuration.
