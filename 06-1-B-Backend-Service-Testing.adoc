@@ -291,11 +291,9 @@ $ curl -s -X POST http://localhost:8080/persons/testperson2
 $ curl -s -X http://localhost:8080/persons
 [{"name":"testperson1","events":[]},{"name":"testperson2","events":[]}]
 ```
-
 . To verify that a given content is in the returned values, you can use the standard output result of the command and filter it, for example, using `grep`
 ```bash
 $ curl -s -X GET  http://localhost:8080/persons | grep -o testperson1
 testperson1
 ```
-
 . A way to get started with implementing a Gradle task for integration testing (expected in the second deliverable) is to call a command line tool (e.g., `curl`) from Gradle. Gradle documentation has a section on how to achieve this: https://docs.gradle.org/5.6.2/dsl/org.gradle.api.tasks.Exec.html#org.gradle.api.tasks.Exec
