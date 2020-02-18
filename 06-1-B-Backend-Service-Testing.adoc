@@ -283,6 +283,7 @@ The command line utility link:https://curl.haxx.se/[`curl`] is one way to automa
 . Issue `curl -s http://localhost:8080/persons` and observe the output!
 
 . Use the `-X` switch to specify the used HTTP method:
++
 ```bash
 $ curl -s -X POST http://localhost:8080/persons/testperson1
 {"name":"testperson1","events":[]}
@@ -292,6 +293,7 @@ $ curl -s -X http://localhost:8080/persons
 [{"name":"testperson1","events":[]},{"name":"testperson2","events":[]}]
 ```
 . To verify that a given content is in the returned values, you can use the standard output result of the command and filter it, for example, using `grep`
++
 ```bash
 $ curl -s -X GET  http://localhost:8080/persons | grep -o testperson1
 testperson1
