@@ -114,49 +114,7 @@ public void setMockOutput() {
 }
 ----
 
-. Add test cases 
-+
-[source,java]
-----
-@Test
-public void testCreatePerson() {
-    assertEquals(0, service.getAllPersons().size());
-
-    String name = "Oscar";
-
-    Person person = null;
-    try {
-        person = service.createPerson(name);
-    } catch (IllegalArgumentException e) {
-        // Check that no error occurred
-        fail();
-    }
-
-    assertNotNull(person);
-    assertEquals(name, person.getName());
-}
-
-@Test
-public void testCreatePersonNull() {
-    String name = null;
-    String error = null;
-
-    Person person = null;
-    try {
-        person = service.createPerson(name);
-    } catch (IllegalArgumentException e) {
-        error = e.getMessage();
-    }
-
-    assertNull(person);
-    // check error
-    assertEquals("Person name cannot be empty!", error);
-}
-----
-
-. Run the tests and see the output. Try understanding the error and fix the corresponding service method!
-
-. Copy and overwrite the contents of this service test class with the link:https://gist.githubusercontent.com/imbur/d8836dc9f44ece65186a43ac80a259fd/raw/ff59449ad4dfadfc2c54bb317649300f6ae2409c/TestEventRegistrationService.java[complete test suite that is available from here].
+. Add test cases from the link:https://gist.githubusercontent.com/imbur/d8836dc9f44ece65186a43ac80a259fd/raw/ff59449ad4dfadfc2c54bb317649300f6ae2409c/TestEventRegistrationService.java[complete test suite that is available from here].
 
 . Run the tests as JUnit/Gradle tests and interpret the test error messages! You should see only a few (at least one) tests passing.
 
