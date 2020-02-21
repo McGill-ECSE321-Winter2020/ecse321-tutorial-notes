@@ -21,7 +21,7 @@ Finding configuration settings for your Gradle/Maven projects is very simple by 
 +
 [source,gradle]
 ----
-testImplementation 'org.junit.platform:junit-platform-launcher:1.3.1'
+testImplementation 'org.junit.platform:junit-platform-launcher:1.4.1'
 ----
 
 
