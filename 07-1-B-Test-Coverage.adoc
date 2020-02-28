@@ -1,4 +1,4 @@
-=== Assessing Test Coverage using EclEmma
+=== Assessing Code Coverage using EclEmma
 
 This tutorial covers the basics of EclEmma and retrieves code coverage metrics using it.
 
@@ -8,7 +8,7 @@ Install EclEmma as a plugin in your Eclipse IDE from link:https://www.eclemma.or
 [NOTE]
 The Spring Tools Suite (STS) version of Eclipse already ships with the plugin pre-installed, so you can skip this step if you are using STS.
 
-==== Example Gradle Project for Assessing Test Coverage
+==== Example Gradle Project for Assessing Code Coverage
 
 We will create a Gradle project from scratch and be testing a simple method _returnAverage(int[], int, int, int)_ . 
 
@@ -92,7 +92,7 @@ public class LibraryTest {
 }
 ----
 
-==== Retrieving Test Coverage Metrics
+==== Retrieving Code Coverage Metrics
 
 [NOTE]
 We can straightforwardly manage code coverage using JaCoCo inside Eclipse with no configuration if we are using EclEmma Eclipse plugin.
@@ -103,9 +103,9 @@ image:figs/coverage-5.png[Full Branch Coverage]
 . Verify that we have 100% branch coverage. +
 image:figs/coverage-6.png[Full Branch Coverage-Eclemma]
 
-=== Event Registration Application Unit Test Coverage
+=== Event Registration Application Unit Code Coverage
 
-. Check the test coverage of the service unit tests in the EventRegistration-Backend project.
+. Check the code coverage of the service unit tests in the EventRegistration-Backend project.
 
 . If you want to run the tests using gradle, use the _Jacoco plugin_ with plugin ID `jacoco`. After adding it to the _build.gradle_ file, the plugin section should look like the one below:
 ```gradle
