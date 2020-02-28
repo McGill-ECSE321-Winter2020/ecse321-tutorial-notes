@@ -61,3 +61,6 @@ include::{chapterdir}/05-1-B-Spring-RESTful-Services.adoc[]
 <<<
 include::{chapterdir}/06-1-B-Backend-Service-Testing.adoc[]
 
+<<<
+include::{chapterdir}/07-1-B-Test-Coverage.adoc[]
+
