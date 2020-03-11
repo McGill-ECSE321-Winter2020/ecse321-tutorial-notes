@@ -64,3 +64,10 @@ include::{chapterdir}/06-1-B-Backend-Service-Testing.adoc[]
 <<<
 include::{chapterdir}/07-1-B-Test-Coverage.adoc[]
 
+== Web Frontent
+
+<<<
+include::{chapterdir}/08-1-W-Install-Vue.adoc[]
+
+<<<
+include::{chapterdir}/08-2-W-Vuejs-FirstComponent.adoc[]

@@ -1,0 +1,114 @@
+=== Create a Static Vue.js Component
+
+Vue.js promotes the use of https://vuejs.org/v2/guide/components.html[components]
+which encapsulate GUI elements and their behavior in order to build up rich user interfaces in a modular way. A component consists of
+
+* **template**: A template of (a part of) an HTML document enriched with
+data bindings, conditional expressions, loops, etc.
+* **script**: The behavior of the user interface programmed in JavaScript.
+* **style**: The customized graphical appearance of HTML document elements.
+
+We will first create a new Vue.js component and then connect it to a backend
+Java Spring service via a Rest API call.
+
+==== Create a component file
+
+[NOTE]
+We use `.` below to refer to the `EventRegistration-Frontend` directory.
+
+. Create a new file **EventRegistration.vue** in **./src/components** with  the
+following initial content:
++
+[source,xml]
+----
+<template>
+</template>
+<script>
+</script>
+<style>
+</style>
+----
+
+. Create some static HTML content of the template part starting with a `<div>` element
+corresponding to your component. We
++
+[source,xml]
+----
+<template>
+  <div id="eventregistration">
+    <h2>People</h2>
+    <table>
+      <tr>
+          <td>John</td>
+          <td>Event to attend</td>
+      </tr>
+      <tr>
+          <td>
+              <input type="text" placeholder="Person Name">
+          </td>
+          <td>
+              <button>Create</button>
+          </td>
+      </tr>
+    </table>
+    <p>
+      <span style="color:red">Error: Message text comes here</span>
+    </p>
+  </div>
+</template>
+----
+
+
+. Customize the `<style>` part with your designated CSS content. A detailed
+CSS reference documentation is available at https://www.w3schools.com/CSSref/.
+The final result of that part should like as follows.
++
+[source,HTML]
+----
+<style>
+  #eventregistration {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    color: #2c3e50;
+    background: #f2ece8;
+  }
+</style>
+----
+
+==== Create a new routing command
+
+. We need to route certain HTTP calls to a specific URL to be handled by
+**EventRegistration.vue**.
+
+
+. Open  **./src/router/index.js** and add a new route by extending the existing
+`routes` property.
++
+[source,javascript]
+----
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'Hello',
+      component: Hello
+    },
+    {
+      path: '/app',
+      name: 'EventRegistration',
+      component: EventRegistration
+    }
+  ]
+})
+----
++
+* You should not change the number of spaces used as indentation otherwise you get error messages, if you have LInt enabled in your project.
+* Import the new component `EventRegistration.vue` at the beginning of **./src/router/index.js** after all existing imports!
++
+[source,javascript]
+----
+// add import after all existing imports
+import EventRegistration from '@/components/EventRegistration'
+----
+
+. Start the development server and navigate your browser to http://127.0.0.1:8087/#/app.
+Your new Vue.js component should be rendered (with the static HTML content).

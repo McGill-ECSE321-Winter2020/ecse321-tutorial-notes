@@ -1,4 +1,4 @@
-==== Setting up a Spring/Spring Boot backend app with Gradle
+=== Setting up a Spring/Spring Boot backend app with Gradle
 
 . Install the link:https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-installing-spring-boot.html#getting-started-installing-the-cli[Spring Boot CLI] 
 

@@ -1,0 +1,147 @@
+=== Installation Instructions: Vue.js
+:experimental:
+
+https://vuejs.org/v2/guide/[Vue.js] is a popular web frontend for building
+user interfacs in Javascript, which is considered to be easier to learn compared to https://reactjs.org/[React] and
+https://angular.io/[Angular].
+
+==== Install Vue.js
+
+. Open a shell (or run **cmd.exe** in Windows)
+
+. Check that you successfully installed **node.js** and **npm** e.g. by checking their versions:
++
+[source,bash]
+----
+$ node -v
+v8.10.0
+$ npm -v
+3.5.2
+----
+
+. Install the command line interface (CLI) for Vue: `sudo npm install --global vue-cli`
+
+////
+. Optionally, install Bootstrap 4: `sudo npm install bootstrap-vue bootstrap@4.0.0-beta.2` 
+////
+
+==== Generate initial Vue.js project content
+
+. Navigate to your local Git repository of the Event Registration System
++
+[source,bash]
+----
+$ cd ~/git/eventregistration
+----
+
+////
+$ mkdir EventRegistration-Frontend
+$ cd EventRegistration-Frontend
+////
+
+
+. Generate initial content as follows
+* Hit kbd:[Enter] after each line if not indicated otherwise
+* Detailed instructions at https://github.com/vuejs-templates/webpack and https://bootstrap-vue.js.org/docs
++
+[source,bash]
+----
+$ vue init bootstrap-vue/webpack eventregistration-frontend
+? Project name (EventRegistration-Frontend) eventregistration-frontend
+? Project description (A Vue.js project) A Vue.js frontend for Event Registration App
+? Author (Your Name <your.email@provider.com>)
+? Vue build (Use arrow keys):
+> Runtime + Compiler
+  Runtime-only
+? Install vue-router (Y/n): Y
+? Use ESLint to lint your code (Y/n): n
+? Setup unit tests with Karma + Mocha (Y/n) Y
+? Setup e2e tests with Nightwatch (Y/n) Y
+
+vue-cli · Generated "eventregistration-frontend".
+----
+
+. Rename the generated directory to match the naming convention applied for the backend project
++
+```
+mv eventregistration-frontend/ EventRegistration-Frontent
+```
+
+. Now execute the following commands (one after the other)
++
+[source,bash]
+----
+$ cd EventRegistration-Frontend
+$ npm install
+$ npm run dev
+----
+
+. As a result A sample web page should appear at http://localhost:8080/
+
+. You can stop this development server by pressing kbd:[Ctrl+C] in the shell
+
+==== Install additional dependencies
+
+. Install JQuery and Axios (we will use these dependencies for issuing REST API calls): 
+```bash
+npm install --save jquery
+npm install --save axios
+```
+
+==== Setting up your development server
+
+. We change the default port to **8087** (instead of the default 8080) and
+the default IP address by using a configuration file.
+The rationale behind this step is that other Tomcat servers may already listen at
+the default localhost:8080 port which may clash with our development server.
+
+. Open **./config/index.js** and add `port: 8087` to `module.exports`
+(both `build` and `dev` part)
+* The development server is set up at localhost, i.e. http://127.0.0.1:8087
+* The production server is set up in accordance with the virtual machines
+* We also store the host IP address and port of the backend server
+in similar environment variables (`backendHost` and `backendPort`).
++
+[source,js]
+----
+module.exports = {
+  build: {
+    env: require('./prod.env'),
+    host: 'eventregistration-frontend-123.herokuapp.com',
+    port: 443,
+    backendHost: 'eventregistration-backend-123.herokuapp.com',
+    backendPort: 443,
+    //...
+  },
+  dev: {
+    env: require('./dev.env'),
+    host: '127.0.0.1',
+    port: 8087,
+    backendHost: '127.0.0.1',
+    backendPort: 8080,
+    //...
+  }
+}
+----
+
+
+. Open **./build/dev-server.js**, and change the `uri` assignment as follows:
+* The original line of code can be commented or deleted.
++
+[source,js]
+----
+//var uri = 'http://localhost:' + port
+var host = config.dev.host
+var uri = 'http://' + host + ':' + port
+----
+
+. Start again your development server by `npm run dev`.
+The same web application should now appear at http://127.0.0.1:8087/
+
+. Stop the development server by kbd:[Ctrl+C].
+
+==== Commit your work to Github
+
+. If everything works then commit your work to your Github repository.
+
+. Notice that many libraries and files are omitted, which is intentional. Check the `.gitignore` file for details.
