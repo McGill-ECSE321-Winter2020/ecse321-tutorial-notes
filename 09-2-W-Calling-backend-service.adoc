@@ -70,6 +70,4 @@ createPerson: function (personName) {
 
 === Build and Travis-CI
 
-The project should build using `npm run build`. This will create a _build/_ directory in the frontend folder, where you can run the frontend server using `node build/dev-server.js`.
-
-Travis-CI supports link:https://docs.travis-ci.com/user/languages/javascript-with-nodejs[building nodejs projects]. However, we do not want to run the default `npm test` command. Instead, the build should do `npm install` and `npm run build` only.
+Travis-CI supports link:https://docs.travis-ci.com/user/languages/javascript-with-nodejs[building nodejs projects]. However, we do not want to run the default `npm test` command. Instead, the build should do `npm install` only.
