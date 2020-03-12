@@ -1,0 +1,133 @@
+=== Vue.js Components with Dynamic Content
+
+==== Add data and event handlers
+Next we add event handling and dynamic content to our EventRegistration.vue component.
+
+1. Create another file **registration.js** in the same folder which will contain
+the Javascript code for the EventRegistration.vue component.
+
+1. Create constructor methods:
++
+[source,javascript]
+----
+function PersonDto (name) {
+  this.name = name
+  this.events = []
+}
+
+function EventDto (name, date, start, end) {
+  this.name = name
+  this.eventDate = date
+  this.startTime = start
+  this.endTime = end
+}
+----
+
+1. Add data variables to the export declaration of the component.
++
+[source,javascript]
+----
+export default {
+  name: 'eventregistration',
+  data () {
+    return {
+      people: [],
+      newPerson: '',
+      errorPerson: '',
+      response: []
+    }
+  },
+  //...
+}
+----
+
+1. Add an initialization function below the data part.
++
+[source,javascript]
+----
+created: function () {
+  // Test data
+  const p1 = new PersonDto('John')
+  const p2 = new PersonDto('Jill')
+  // Sample initial content
+  this.people = [p1, p2]
+},
+----
+
+1. Add event handling method  **createPerson()**:
++
+[source,javascript]
+----
+methods: {
+  createPerson: function (personName) {
+    // Create a new person and add it to the list of people
+    var p = new PersonDto(personName)
+    this.people.push(p)
+    // Reset the name field for new people
+    this.newPerson = ''
+  }
+}
+----
+
+==== Create dynamic data bindings
+
+1. Open `EventRegistration.vue` and link the Javascript file as script:
++
+[source,xml]
+----
+<script src="./registration.js">
+</script>
+----
+
+1. Change the static template content for the person list to dynamic bindings:
+* We iterate along all people in data property `people` and
+dynamically print their name by `{{ person.name }}` (see https://vuejs.org/v2/guide/list.html[list rendering])
+* We print the (currently empty) list of events to which a person is registered to.
++
+[source,xml]
+----
+<table>
+  <tr v-for="person in people" >
+      <td>{{ person.name }}</td>
+      <td>
+        <ul>
+          <li v-for="event in person.events">
+            {{event.name}}
+          </li>
+        </ul>
+      </td>
+  </tr>
+<!-- ... -->
+</table>
+----
+
+1. Link input field content with data variable `newPerson` and
+button clicks for **Create Person** for event handler method  `createPerson()`.
++
+[source,xml]
+----
+<table>
+  <!-- ... -->
+  <tr>
+    <td>
+        <input type="text" v-model="newPerson" placeholder="Person Name">
+    </td>
+    <td>
+        <button @click="createPerson(newPerson)">Create Person</button>
+    </td>
+  </tr>
+</table>
+----
+
+1. Bind the error message to the corresponding variable `errorPerson`
+by extending the `<span>` tag with https://vuejs.org/v2/guide/conditional.html[conditional rendering].
+* The error message will only appear if the data property `errorPerson` is not empty.
+* You may wish to further refine error handling in case of empty string content
+for `newPerson`  by adding `&& !newPerson` to the condition.
++
+[source,xml]
+----
+<span v-if="errorPerson" style="color:red">Error: {{errorPerson}} </span>
+----
+
+1. Run your frontend application and observe that two people are listed.

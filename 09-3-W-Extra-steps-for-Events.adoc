@@ -1,0 +1,62 @@
+=== Additional steps in the tutorial
+
+==== Steps to complete
+
+The description of the next steps is intentionally high-level and sketchy to force you 
+to face and solve several emerging problems.
+
+You need to provide the following functionality by extending the Vue.js component:
+
+1. **List all events (name, date, startTime, endTime)**
+** Introduce an array **events** in the frontend data store
+** Call the appropriate backend service to fill the contents
+** Provide a dynamic list in the component and bind it to **events**
+
+1. **Create a new event (name, date, startTime, endTime)**
+** Introduce an object **newEvent** in the frontend data store with four properties
+(e.g. name, date, startTime, endTime).
+*** Set the initial values of these properties to something
+** Provide a button to initiate creating a new event
+** Provide HTML input fields to set event details
+** Create a call to the appropriate backend service, i.e. **createEvent()**
+** Introduce an object **errorEvent** for error message related to event creation
+** Provide corresponding HTML field for displaying the error message (e.g. `<span>`), and set
+its appearance condition to the content of the error message
+** **Hint**: you can use the following input types for setting date and time
++
+[source,xml]
+----
+<input type="date" v-model="newEvent.eventDate" placeholder="YYYY-MM-DD">
+<input type="time" v-model="newEvent.startTime" placeholder="HH:mm">
+----
+
+1. **Register a person to an event** (when a new event should occur in the
+  list of events printed next to a person)
+** Provide a selection of people
+*** You need a corresponding data variable (e.g. **selectedPerson**)
+*** You can use the HTML `<select v-model="selectedPerson">` tag where each
+option (`<option>` tag with `v-for` Vue.js parameter) is filled dynamically from
+the list of people.
+*** **Hint:** You can add a first disabled option as follows:
++
+[source,xml]
+----
+<option disabled value="">Please select one</option>
+----
+
+** Provide a selection of events in a similar way.
+** Provide a button to initiate registration
+** Enable the button only if both a person and an event are selected
+
+1. In all use cases,
+** Report application specific errors if the backend service fails
+** Prevent to enter invalid data to backend
+
+==== Further documentation
+* Vue.js guide: https://vuejs.org/v2/guide/
+* Vue.js API: https://vuejs.org/v2/api/
+* Build commands: http://vuejs-templates.github.io/webpack/commands.html
+* Vue.js and Webpack integration: http://vuejs-templates.github.io/webpack/env.html
+* Html-Webpack: https://github.com/jantimon/html-webpack-plugin
+* Vue Router: https://github.com/vuejs/vue-router
+* Vue Router tutorial: https://scotch.io/tutorials/getting-started-with-vue-router

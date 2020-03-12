@@ -1,0 +1,75 @@
+=== Calling Backend Services
+
+Next we change our frontend to issue calls to the backend via the Rest API provided
+by the Java Spring framework. Please refer to the section 3.6.2 where we enabled the Cross-Origin Resource Sharing at the controller level using '@CrossOrigin' notation.
+
+==== Calling backend services in from Vue.js components
+We need to modify our frontend to make calls to backend services.
+
+1. Open **registration.js** and add the following content to the beginning:
+* Note that instead of hard-wired IP addresses and ports, details are given in
+a configuration file.
++
+[source,javascript]
+----
+import axios from 'axios'
+var config = require('../../config')
+
+var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+
+var AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+})
+----
+
+1. Now navigate to the **created** function, and replace existing content
+with the following lines:
++
+[source,javascript]
+----
+created: function () {
+  // Initializing people from backend
+    AXIOS.get(`/persons`)
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.people = response.data
+    })
+    .catch(e => {
+      this.errorPerson = e;
+    });
+}
+----
+
+
+1. Navigate to the **createPerson()** method and change its content as follows:
++
+[source,javascript]
+----
+createPerson: function (personName) {
+  AXIOS.post(`/persons/`+personName, {}, {})
+  .then(response => {
+    // JSON responses are automatically parsed.
+    this.people.push(response.data)
+    this.newPerson = ''
+    this.errorPerson = ''
+  })
+  .catch(e => {
+    var errorMsg = e.message
+    console.log(errorMsg)
+    this.errorPerson = errorMsg
+  });
+}
+----
+
+
+1. Run the frontend application and check that
+* New people can be added
+* They immediately appear in the people list.
+
+=== Build and Travis-CI
+
+The project should build using `npm run build`. This will create a _build/_ directory in the frontend folder, where you can run the frontend server using `node build/dev-server.js`.
+
+Travis-CI supports link:https://docs.travis-ci.com/user/languages/javascript-with-nodejs[building nodejs projects]. However, we do not want to run the default `npm test` command. Instead, the build should do `npm install` and `npm run build` only.

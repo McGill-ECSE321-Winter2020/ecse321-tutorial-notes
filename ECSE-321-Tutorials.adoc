@@ -71,3 +71,13 @@ include::{chapterdir}/08-1-W-Install-Vue.adoc[]
 
 <<<
 include::{chapterdir}/08-2-W-Vuejs-FirstComponent.adoc[]
+
+<<<
+include::{chapterdir}/09-1-W-Dynamic-Vuejs-Content.adoc[]
+
+<<<
+include::{chapterdir}/09-2-W-Calling-backend-service.adoc[]
+
+<<<
+include::{chapterdir}/09-3-W-Extra-steps-for-Events.adoc[]
+
