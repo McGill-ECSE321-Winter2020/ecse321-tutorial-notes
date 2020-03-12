@@ -138,7 +138,7 @@ var uri = 'http://' + host + ':' + port
 . Start again your development server by `npm run dev`.
 The same web application should now appear at http://127.0.0.1:8087/
 
-. Stop the development server by kbd:[Ctrl+C].
+. Stop the development server by pressing kbd:[Ctrl+C].
 
 ==== Commit your work to Github
 
