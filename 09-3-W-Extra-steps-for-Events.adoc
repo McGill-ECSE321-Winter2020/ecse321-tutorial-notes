@@ -1,56 +1,192 @@
 === Additional steps in the tutorial
 
-==== Steps to complete
+[IMPORTANT]
+Solutions have been added to this section shortyl after the school closure due to the pandemic was announced. See completed version at https://github.com/imbur/eventregistration-w2020
 
-The description of the next steps is intentionally high-level and sketchy to force you 
-to face and solve several emerging problems.
+==== [line-through]#Steps to complete# Managing events
 
-You need to provide the following functionality by extending the Vue.js component:
+[line-through]#The description of the next steps is intentionally high-level and sketchy to force you to face and solve several emerging problems.#
 
-1. **List all events (name, date, startTime, endTime)**
+[line-through]#You need to provide the following functionality by extending the Vue.js component:#
+
+1. **List all events (name, eventDate, startTime, endTime)**
 ** Introduce an array **events** in the frontend data store
++
+Update your _registration.js_: 
++
+```javascript
+  data() {
+    return {
+      persons: [],
+      events: [],
+      // ... other data members
+    }
+  },
+```
 ** Call the appropriate backend service to fill the contents
++
+Update your _registration.js_:
++
+```javascript
+  created: function () {
+    // Initializing persons
+    // See: was done above
+
+    // Initializing events
+    AXIOS.get('/events').then(response => {this.events = response.data}).catch(e => {this.errorEvent = e});
+  },
+```
 ** Provide a dynamic list in the component and bind it to **events**
++
+Update your _EventRegistration.vue_:
++
+```html
+    <span v-if="errorPerson" style="color:red">Error: {{errorPerson}}</span>
+    <!-- This line above is the last line of the section we added in the previous section -- this is only here to ease the navigation in the code -->
+
+    <hr>
+    <h2>Events</h2>
+    <table id='events-table'>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Start</th>
+        <th>End</th>
+      </tr>
+      <tr v-for="(event, i) in events" v-bind:id="event.name" v-bind:key="`event-${i}`">
+        <td v-bind:id="`${event.name.replace(/\s/g, '_')}-name`">{{event.name}}</td>
+        <td v-bind:id="`${event.name.replace(/\s/g, '_')}-date`">{{event.eventDate}}</td>
+        <td v-bind:id="`${event.name.replace(/\s/g, '_')}-starttime`">{{event.startTime}}</td>
+        <td v-bind:id="`${event.name.replace(/\s/g, '_')}-endtime`">{{event.endTime}}</td>
+      </tr>
+    </table>
+    <hr>
+```
+
 
 1. **Create a new event (name, date, startTime, endTime)**
 ** Introduce an object **newEvent** in the frontend data store with four properties
 (e.g. name, date, startTime, endTime).
-*** Set the initial values of these properties to something
-** Provide a button to initiate creating a new event
-** Provide HTML input fields to set event details
+*** Set the initial values of these properties to somet value
++
+Update _registration.js_ and add to `data()` at the top
++
+```javascript
+      newEvent: {
+        name: '',
+        eventDate: '2017-12-08',
+        startTime: '09:00',
+        endTime: '11:00'
+      },
+      errorEvent: '',
+```
+** Provide a button to initiate creating a new event and provide HTML input fields to set event details
 ** Create a call to the appropriate backend service, i.e. **createEvent()**
++
+Update _EventRegistration.vue_
++
+```html
+      <!-- Add this to the bottom of the table created for displaying events -->
+      <tr>
+        <td>
+          <input id="event-name-input" type="text" v-model="newEvent.name" placeholder="Event Name">
+        </td>
+        <td>
+          <input id="event-date-input" type="date" v-model="newEvent.eventDate" placeholder="YYYY-MM-DD">
+        </td>
+        <td>
+          <input id="event-starttime-input" type="time" v-model="newEvent.startTime" placeholder="HH:mm">
+        </td>
+        <td>
+          <input id="event-endtime-input" type="time" v-model="newEvent.endTime" placeholder="HH:mm">
+        </td>
+        <td>
+          <button id="event-create-button" v-bind:disabled="!newEvent.name" v-on:click="createEvent(newEvent)">Create</button>
+        </td>
+      </tr>
+```
+
 ** Introduce an object **errorEvent** for error message related to event creation
++
+This one has been done for _registration.js_ already (`errorEvent` in `data()`)
 ** Provide corresponding HTML field for displaying the error message (e.g. `<span>`), and set
 its appearance condition to the content of the error message
-** **Hint**: you can use the following input types for setting date and time
 +
-[source,xml]
-----
-<input type="date" v-model="newEvent.eventDate" placeholder="YYYY-MM-DD">
-<input type="time" v-model="newEvent.startTime" placeholder="HH:mm">
-----
+Update _EventRegistration.vue_: add the following code to the event table
++
+```html
+    <span id="event-error" v-if="errorEvent" style="color:red">Error: {{errorEvent}}</span>
+```
 
 1. **Register a person to an event** (when a new event should occur in the
   list of events printed next to a person)
-** Provide a selection of people
-*** You need a corresponding data variable (e.g. **selectedPerson**)
-*** You can use the HTML `<select v-model="selectedPerson">` tag where each
+* Provide a selection of people
+** You need a corresponding data variable (e.g. **selectedPerson**)
+** You can use the HTML `<select v-model="selectedPerson">` tag where each
 option (`<option>` tag with `v-for` Vue.js parameter) is filled dynamically from
 the list of people.
-*** **Hint:** You can add a first disabled option as follows:
+** **Hint:** You can add a first disabled option as follows:
 +
 [source,xml]
 ----
 <option disabled value="">Please select one</option>
 ----
+* Provide a selection of events in a similar way.
+* Provide a button to initiate registration
+* Enable the button only if both a person and an event are selected
++
+The solution for the above bullet points (goes to _EventRegistration.vue_):
++
+```html
+    <hr>
+    <h2>Registrations</h2>
+    <label>Person:
+      <select id='registration-person-select' v-model="selectedPerson">
+        <option disabled value="">Please select one</option>
+        <option v-for="(person, i) in persons" v-bind:key="`person-${i}`">{{person.name}}</option>
+      </select>
+    </label>
+    <label>Event:
+      <select id='registration-event-select' v-model="selectedEvent">
+        <option disabled value="">Please select one</option>
+        <option v-for="(event, i) in events" v-bind:key="`event-${i}`">{{event.name}}</option>
+      </select>
+    </label>
+    <button id='registration-button' v-bind:disabled="!selectedPerson || !selectedEvent" @click="registerEvent(selectedPerson, selectedEvent)">Register</button>
+    <br/>
+    <span v-if="errorRegistration" style="color:red">Error: {{errorRegistration}}</span>
+    <hr>
+```
+* Implement the register method in _registration.js_:
++
+```javascript
+    registerEvent: function (personName, eventName) {
+      let event = this.events.find(x => x.name === eventName);
+      let person = this.persons.find(x => x.name === personName);
+      let params = {
+        person: person.name,
+        event: event.name
+      };
 
-** Provide a selection of events in a similar way.
-** Provide a button to initiate registration
-** Enable the button only if both a person and an event are selected
+      AXIOS.post('/register', {}, {params: params})
+      .then(response => {
+        person.events.push(event)
+        this.selectedPerson = '';
+        this.selectedEvent = '';
+        this.errorRegistration = '';
+      })
+      .catch(e => {
+        e = e.response.data.message ? e.response.data.message : e;
+        this.errorRegistration = e;
+        console.log(e);
+      });
+    },
+```
 
-1. In all use cases,
-** Report application specific errors if the backend service fails
-** Prevent to enter invalid data to backend
+
+. To run your applicaiton, use `npm install` and `npm run dev`
+
+. See https://github.com/imbur/eventregistration-w20 for the completed solution
 
 ==== Further documentation
 * Vue.js guide: https://vuejs.org/v2/guide/
