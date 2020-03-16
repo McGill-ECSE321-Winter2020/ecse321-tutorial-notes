@@ -186,7 +186,7 @@ The solution for the above bullet points (goes to _EventRegistration.vue_):
 
 . To run your applicaiton, use `npm install` and `npm run dev`
 
-. See https://github.com/imbur/eventregistration-w20 for the completed solution
+. See https://github.com/imbur/eventregistration-w2020 for the completed solution
 
 ==== Further documentation
 * Vue.js guide: https://vuejs.org/v2/guide/
